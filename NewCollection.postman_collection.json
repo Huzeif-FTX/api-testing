@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "3c50105a-3a43-4416-a6ce-61dc6caf94a2",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28814462"
+	},
+	"item": [
+		{
+			"name": "Get All Books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validate Status Code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Validate Status Text\r",
+							"pm.test(\"Status text is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"// Validate Response Time (under 2 seconds)\r",
+							"pm.test(\"Response time is within acceptable range\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"// Validate Headers - Check if \"Content-Type\" exists\r",
+							"pm.test(\"Content-Type header exists\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"// Validate Content-Type is JSON\r",
+							"pm.test(\"Content-Type is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"const schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"id\": { \"type\": [\"integer\", \"string\"] },\r",
+							"        \"title\": { \"type\": \"string\" },\r",
+							"        \"author\": { \"type\": \"string\" },\r",
+							"        \"publishedYear\": { \"type\": \"integer\" },\r",
+							"        \"genre\": { \"type\": \"string\" },\r",
+							"        \"price\": { \"type\": \"number\" },\r",
+							"        \"available\": { \"type\": \"boolean\" }\r",
+							"    },\r",
+							"    \"required\": [\"id\", \"title\", \"author\", \"publishedYear\", \"genre\", \"price\", \"available\"]\r",
+							"};\r",
+							"\r",
+							"// Validate JSON Schema\r",
+							"pm.test(\"Response follows correct JSON schema\", function () {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"// Verify Specific ID\r",
+							"pm.test(\"ID is 6\", function () {\r",
+							"    pm.expect(jsonData.id).to.eql(\"6\");\r",
+							"});\r",
+							"\r",
+							"// Verify Title\r",
+							"pm.test(\"Book title is correct\", function () {\r",
+							"    pm.expect(jsonData.title).to.eql(\"The Art of Computer Programming\");\r",
+							"});\r",
+							"\r",
+							"// Verify Price\r",
+							"pm.test(\"Price is correctly updated\", function () {\r",
+							"    pm.expect(jsonData.price).to.eql(74.99);\r",
+							"});\r",
+							"\r",
+							"// Check if Available is true\r",
+							"pm.test(\"Book is available\", function () {\r",
+							"    pm.expect(jsonData.available).to.be.true;\r",
+							"});\r",
+							"\r",
+							"// Check Server Header\r",
+							"pm.test(\"Server header exists\", function () {\r",
+							"    pm.response.to.have.header(\"Server\");\r",
+							"});\r",
+							"\r",
+							"// Verify Content-Length (optional)\r",
+							"pm.test(\"Content-Length is within range\", function () {\r",
+							"    let contentLength = pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(parseInt(contentLength)).to.be.within(10, 5000);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/books/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"6\",\r\n  \"title\": \"The Art of Computer Programming\",\r\n  \"author\": \"Donald Knuth\",\r\n  \"publishedYear\": 1968,\r\n  \"genre\": \"Computer Science\",\r\n  \"price\": 75.99,\r\n  \"available\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/books/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update book",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 6,\r\n  \"title\": \"The Art of Computer Programming\",\r\n  \"author\": \"Donald Knuth\",\r\n  \"publishedYear\": 1968,\r\n  \"genre\": \"Computer Science\",\r\n  \"price\": 74.99,\r\n  \"available\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/books/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

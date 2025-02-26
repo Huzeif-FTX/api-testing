@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "fs": "^0.0.1-security",
+    "json-server": "^1.0.0-beta.3",
+    "newman-reporter-html": "^1.0.5"
+  }
+}

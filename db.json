@@ -1,0 +1,49 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt, David Thomas",
+      "publishedYear": 1999,
+      "genre": "Programming",
+      "price": 45.99,
+      "available": true
+    },
+    {
+      "id": "2",
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "publishedYear": 2008,
+      "genre": "Programming",
+      "price": 40.5,
+      "available": true
+    },
+    {
+      "id": "3",
+      "title": "Effective Java",
+      "author": "Joshua Bloch",
+      "publishedYear": 2001,
+      "genre": "Programming",
+      "price": 50,
+      "available": false
+    },
+    {
+      "id": "4",
+      "title": "Introduction to Algorithms",
+      "author": "Thomas H. Cormen, Charles E. Leiserson",
+      "publishedYear": 1990,
+      "genre": "Computer Science",
+      "price": 60,
+      "available": true
+    },
+    {
+      "id": "5",
+      "title": "You Don't Know JS",
+      "author": "Kyle Simpson",
+      "publishedYear": 2014,
+      "genre": "JavaScript",
+      "price": 35.75,
+      "available": true
+    }
+  ]
+}
